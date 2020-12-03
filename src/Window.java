@@ -25,30 +25,44 @@ public class Window extends JPanel {
     // Panels
     private JPanel buttonPanel = new JPanel(new FlowLayout());
     private JPanel labelPanel = new JPanel(new GridLayout(row,col));
+    private JPanel southPanel = new JPanel(new FlowLayout());
 
     // Labels
     private JLabel chosenColor = new JLabel("Chosen color",SwingConstants.CENTER);
+    private JLabel customColorLabel = new JLabel("Choose between 0-255 of Red, Green and Blue:");
+
+    // Textfields R G B
+    private JTextField colorRed = new JTextField("0",3);
+    private JTextField colorGreen = new JTextField("0",3);
+    private JTextField colorBlue = new JTextField("0",3);
 
     // Buttons
     private JButton cleanButton = new JButton("Clear All");
     private JButton fillButton = new JButton("Fill All Unpainted");
     private JButton saveButton = new JButton("Quick Save");
     private JButton loadButton = new JButton("Quick Load");
+    private JButton setCustomColor1 = new JButton("Set Color 1");
+    private JButton getCustomColor1 = new JButton("Get Color 1");
+    private JButton setCustomColor2 = new JButton("Set Color 2");
+    private JButton getCustomColor2 = new JButton("Get Color 2");
 
     // Lists
     private List<JButton> colorButtons = new ArrayList<>();
     private List<JLabel> labels = new ArrayList<>();
     private List<Boolean> painted = new ArrayList<>();
 
+    private List<Pixel> pixels = new ArrayList<>();
+
     public Window(){
-        setProperties();
         this.setLayout(new BorderLayout());
 
         add(labelPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.NORTH);
+        add(southPanel, BorderLayout.SOUTH);
 
         addLabelsToPanel();
         addButtonsToPanel();
+        addComponentsToSouthPanels();
     }
 
     private void addLabelsToPanel(){
@@ -84,6 +98,24 @@ public class Window extends JPanel {
         buttonPanel.add(fillButton);
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
+    }
+
+    private void addComponentsToSouthPanels(){
+        southPanel.add(customColorLabel);
+        colorRed.setHorizontalAlignment(SwingConstants.CENTER);
+        southPanel.add(colorRed);
+        colorGreen.setHorizontalAlignment(SwingConstants.CENTER);
+        southPanel.add(colorGreen);
+        colorBlue.setHorizontalAlignment(SwingConstants.CENTER);
+        southPanel.add(colorBlue);
+
+        getCustomColor1.setBackground(WHITE);
+        getCustomColor2.setBackground(WHITE);
+
+        southPanel.add(setCustomColor1);
+        southPanel.add(getCustomColor1);
+        southPanel.add(setCustomColor2);
+        southPanel.add(getCustomColor2);
     }
 
     public void clearAll(){
@@ -143,15 +175,31 @@ public class Window extends JPanel {
         return loadButton;
     }
 
-    public void setProperties() {
-        try {
-            properties.load(new FileInputStream("src/Properties.properties"));
-        } catch (Exception e) {
-            System.out.println("Could not load properties file");
-            e.printStackTrace();
-        }
-        row = Integer.parseInt(properties.getProperty("row", "75"));
-        col = Integer.parseInt(properties.getProperty("col", "150"));
-        pixelSize = Integer.parseInt(properties.getProperty("pixel", "6"));
+    public JTextField getColorRed() {
+        return colorRed;
+    }
+
+    public JTextField getColorGreen() {
+        return colorGreen;
+    }
+
+    public JTextField getColorBlue() {
+        return colorBlue;
+    }
+
+    public JButton getSetCustomColor1() {
+        return setCustomColor1;
+    }
+
+    public JButton getGetCustomColor1() {
+        return getCustomColor1;
+    }
+
+    public JButton getSetCustomColor2() {
+        return setCustomColor2;
+    }
+
+    public JButton getGetCustomColor2() {
+        return getCustomColor2;
     }
 }

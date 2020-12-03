@@ -14,6 +14,7 @@ public class Painter extends JFrame {
 
     Database database = new Database();
     Window window = new Window();
+    ColorController controller = new ColorController();
     Color color = Color.WHITE;
     boolean pressed = false;
 
@@ -25,6 +26,8 @@ public class Painter extends JFrame {
         setUpCleaningButtonListener();
         setUpFillButtonListener();
         setUpSaveAndLoadButtonListener();
+        setUpCustomColorButtonSetterListener();
+        setUpCustomColorButtonGettersListener();
         setUpFrame();
     }
 
@@ -89,6 +92,37 @@ public class Painter extends JFrame {
 
             window.writeColorsFromMemory(labelsFromMemory);
             window.readPaintedFromMemory(paintedFromMemory);
+        });
+    }
+
+    public void setUpCustomColorButtonSetterListener(){
+        window.getSetCustomColor1().addActionListener(l -> {
+
+            int r = controller.checkInput(window.getColorRed());
+            int g = controller.checkInput(window.getColorGreen());
+            int b = controller.checkInput(window.getColorBlue());
+
+            window.getGetCustomColor1().setBackground(controller.checkColor(r,g,b));
+        });
+        window.getSetCustomColor2().addActionListener(l -> {
+
+            int r = controller.checkInput(window.getColorRed());
+            int g = controller.checkInput(window.getColorGreen());
+            int b = controller.checkInput(window.getColorBlue());
+
+            window.getGetCustomColor2().setBackground(controller.checkColor(r,g,b));
+        });
+    }
+
+    public void setUpCustomColorButtonGettersListener(){
+        window.getGetCustomColor1().addActionListener(l -> {
+            color = window.getGetCustomColor1().getBackground();
+            window.getChosenColor().setBackground(color);
+        });
+
+        window.getGetCustomColor2().addActionListener(l -> {
+            color = window.getGetCustomColor2().getBackground();
+            window.getChosenColor().setBackground(color);
         });
     }
 
