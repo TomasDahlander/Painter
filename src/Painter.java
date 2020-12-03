@@ -41,28 +41,29 @@ public class Painter extends JFrame {
     }
 
     public void setUpLabelWriterListener(){
-        for (int i = 0; i < window.getLabels().size(); i++) {
-            int finalI = i;
+        for (var l : window.getPixels()){
             MouseAdapter writer = new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     pressed = true;
-                    window.getLabels().get(finalI).setBackground(color);
-                    window.getPainted().set(finalI,true);
+                    l.getPixel().setBackground(color);
+                    l.setPainted(true);
                 }
+
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     pressed = false;
                 }
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    if(pressed) {
-                        window.getLabels().get(finalI).setBackground(color);
-                        window.getPainted().set(finalI,true);
+                    if (pressed) {
+                        l.getPixel().setBackground(color);
+                        l.setPainted(true);
                     }
                 }
             };
-            window.getLabels().get(finalI).addMouseListener(writer);
+            l.getPixel().addMouseListener(writer);
         }
     }
 
@@ -82,16 +83,12 @@ public class Painter extends JFrame {
 
     public void setUpSaveAndLoadButtonListener(){
         window.getSaveButton().addActionListener(l -> {
-            database.saveLabelsToMemory(window.getLabels());
-            database.savePaintedToMemory(window.getPainted());
+            database.saveToMemory(window.getPixels());
         });
 
         window.getLoadButton().addActionListener(l -> {
-            List<JLabel> labelsFromMemory = database.loadLabelsFromMemory();
-            List<Boolean> paintedFromMemory = database.loadPaintedFromMemory();
-
-            window.writeColorsFromMemory(labelsFromMemory);
-            window.readPaintedFromMemory(paintedFromMemory);
+            List<Pixel> pixelsFromMemory = database.loadFromMemory();
+            window.writePixelsFromMemory(pixelsFromMemory);
         });
     }
 

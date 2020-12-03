@@ -12,10 +12,8 @@ public class ColorController {
     public int checkInput(JTextField field){
         try{
             int x = Integer.parseInt(field.getText());
-            System.out.println(x);
             return x;
         }catch(NumberFormatException e){
-            System.out.println(0);
             return 0;
         }
     }

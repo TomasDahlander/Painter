@@ -48,8 +48,6 @@ public class Window extends JPanel {
 
     // Lists
     private List<JButton> colorButtons = new ArrayList<>();
-    private List<JLabel> labels = new ArrayList<>();
-    private List<Boolean> painted = new ArrayList<>();
 
     private List<Pixel> pixels = new ArrayList<>();
 
@@ -67,12 +65,8 @@ public class Window extends JPanel {
 
     private void addLabelsToPanel(){
         for(int i = 0; i < (row*col); i++){
-            labels.add(new JLabel());
-            labels.get(i).setOpaque(true);
-            labels.get(i).setBackground(WHITE);
-            labels.get(i).setPreferredSize(new Dimension(pixelSize,pixelSize));
-            labelPanel.add(labels.get(i));
-            painted.add(false);
+            pixels.add(new Pixel(pixelSize));
+            labelPanel.add(pixels.get(i).getPixel());
         }
         labelPanel.setBorder(new EtchedBorder());
     }
@@ -119,27 +113,22 @@ public class Window extends JPanel {
     }
 
     public void clearAll(){
-        for (int i = 0; i < labels.size(); i++){
-            labels.get(i).setBackground(WHITE);
-            painted.set(i,false);
+        for (var l : pixels){
+            l.getPixel().setBackground(WHITE);
+            l.setPainted(false);
         }
     }
 
     public void fillAll(Color color){
-        for (int i = 0; i < labels.size(); i++){
-            if(!painted.get(i)) labels.get(i).setBackground(color);
+        for (var l : pixels){
+            if (!l.isPainted()) l.getPixel().setBackground(color);
         }
     }
 
-    public void writeColorsFromMemory(List<JLabel> fromMemory){
-        for (int i = 0; i < labels.size(); i++){
-            labels.get(i).setBackground(fromMemory.get(i).getBackground());
-        }
-    }
-
-    public void readPaintedFromMemory(List<Boolean> fromMemory){
-        for (int i = 0; i < painted.size(); i++){
-            painted.set(i,fromMemory.get(i));
+    public void writePixelsFromMemory(List<Pixel> fromMemory){
+        for (int i = 0; i < pixels.size(); i++){
+            pixels.get(i).getPixel().setBackground(fromMemory.get(i).getPixel().getBackground());
+            pixels.get(i).setPainted(fromMemory.get(i).isPainted());
         }
     }
 
@@ -147,12 +136,8 @@ public class Window extends JPanel {
         return colorButtons;
     }
 
-    public List<JLabel> getLabels() {
-        return labels;
-    }
-
-    public List<Boolean> getPainted() {
-        return painted;
+    public List<Pixel> getPixels() {
+        return pixels;
     }
 
     public JButton getCleanButton() {
