@@ -7,7 +7,7 @@ import java.awt.*;
  * Time: 17:13 <br>
  * Project: Painter <br>
  */
-public class ColorController {
+public class ColorValidater {
 
     public int checkInput(JTextField field){
         try{

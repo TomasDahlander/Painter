@@ -9,16 +9,23 @@ import java.util.List;
  * Time: 18:58 <br>
  * Project: Painter <br>
  */
-public class ActionController {
+public class Controller {
 
     Window window;
     Database database = new Database();
     Color color = Color.WHITE;
-    ColorController colorController = new ColorController();
+    ColorValidater colorValidater = new ColorValidater();
     boolean pressed;
 
-    public ActionController(Window window){
+    public Controller(Window window){
         this.window = window;
+        setUpColorChooserListener();
+        setUpLabelWriterListener();
+        setUpCleaningButtonListener();
+        setUpFillButtonListener();
+        setUpSaveAndLoadButtonListener();
+        setUpCustomColorButtonSetterListener();
+        setUpCustomColorButtonGettersListener();
     }
 
     public void setUpColorChooserListener(){
@@ -85,19 +92,19 @@ public class ActionController {
     public void setUpCustomColorButtonSetterListener(){
         window.getSetCustomColor1().addActionListener(l -> {
 
-            int r = colorController.checkInput(window.getColorRed());
-            int g = colorController.checkInput(window.getColorGreen());
-            int b = colorController.checkInput(window.getColorBlue());
+            int r = colorValidater.checkInput(window.getColorRed());
+            int g = colorValidater.checkInput(window.getColorGreen());
+            int b = colorValidater.checkInput(window.getColorBlue());
 
-            window.getGetCustomColor1().setBackground(colorController.checkColor(r,g,b));
+            window.getGetCustomColor1().setBackground(colorValidater.checkColor(r,g,b));
         });
         window.getSetCustomColor2().addActionListener(l -> {
 
-            int r = colorController.checkInput(window.getColorRed());
-            int g = colorController.checkInput(window.getColorGreen());
-            int b = colorController.checkInput(window.getColorBlue());
+            int r = colorValidater.checkInput(window.getColorRed());
+            int g = colorValidater.checkInput(window.getColorGreen());
+            int b = colorValidater.checkInput(window.getColorBlue());
 
-            window.getGetCustomColor2().setBackground(colorController.checkColor(r,g,b));
+            window.getGetCustomColor2().setBackground(colorValidater.checkColor(r,g,b));
         });
     }
 

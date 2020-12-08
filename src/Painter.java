@@ -9,24 +9,13 @@ import javax.swing.*;
 public class Painter extends JFrame {
 
     Window window = new Window();
-    ActionController actionController;
+    Controller actionController;
 
     public Painter(){
         add(window);
-        actionController = new ActionController(window);
-        setUpListeners();
+        actionController = new Controller(window);
 
         setUpFrame();
-    }
-
-    public void setUpListeners(){
-        actionController.setUpColorChooserListener();
-        actionController.setUpLabelWriterListener();
-        actionController.setUpCleaningButtonListener();
-        actionController.setUpFillButtonListener();
-        actionController.setUpSaveAndLoadButtonListener();
-        actionController.setUpCustomColorButtonSetterListener();
-        actionController.setUpCustomColorButtonGettersListener();
     }
 
     public void setUpFrame(){

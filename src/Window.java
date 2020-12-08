@@ -132,6 +132,7 @@ public class Window extends JPanel {
         }
     }
 
+    // Getters
     public List<JButton> getColorButtons() {
         return colorButtons;
     }
