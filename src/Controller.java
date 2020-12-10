@@ -17,7 +17,7 @@ public class Controller {
     private ColorValidater colorValidater = new ColorValidater();
     private boolean pressed;
     private int slot = 1;
-
+    private boolean eraserMode = true; // True = eraser is not on. False = it will set painted to false.
 
     public Controller(Window window){
         this.window = window;
@@ -29,6 +29,7 @@ public class Controller {
         setUpCustomColorButtonSetterListener();
         setUpCustomColorButtonGetterListener();
         setUpSpinnerListener();
+        setUpEraser();
     }
 
     public void setUpColorChooserListener(){
@@ -47,7 +48,7 @@ public class Controller {
                 public void mousePressed(MouseEvent e) {
                     pressed = true;
                     l.getPixel().setBackground(color);
-                    l.setPainted(true);
+                    l.setPainted(eraserMode);
                 }
 
                 @Override
@@ -59,7 +60,7 @@ public class Controller {
                 public void mouseEntered(MouseEvent e) {
                     if (pressed) {
                         l.getPixel().setBackground(color);
-                        l.setPainted(true);
+                        l.setPainted(eraserMode);
                     }
                 }
             };
@@ -130,6 +131,19 @@ public class Controller {
     public void setUpSpinnerListener(){
         window.getSpinner().addChangeListener(l -> {
             slot = Integer.parseInt(window.getSpinner().getValue()+"");
+        });
+    }
+
+    public void setUpEraser(){
+        window.getEraser().addActionListener(l -> {
+            if(window.getEraser().isSelected()){
+                eraserMode = false;
+                window.getEraser().setText("Eraser mode on");
+            }
+            else {
+                eraserMode = true;
+                window.getEraser().setText("Eraser mode off");
+            }
         });
     }
 }

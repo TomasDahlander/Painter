@@ -44,6 +44,7 @@ public class Window extends JPanel {
     private final JButton getCustomColor1 = new JButton("Get Color 1");
     private final JButton setCustomColor2 = new JButton("Set Color 2");
     private final JButton getCustomColor2 = new JButton("Get Color 2");
+    private final JToggleButton eraser = new JToggleButton("Eraser mode off"); // Lägg till knapp som sätter målat till false
 
     // Spinner
     private JSpinner spinner;
@@ -113,6 +114,8 @@ public class Window extends JPanel {
         southPanel.add(getCustomColor1);
         southPanel.add(setCustomColor2);
         southPanel.add(getCustomColor2);
+
+        southPanel.add(eraser);
     }
 
     public void clearAll(){
@@ -200,5 +203,9 @@ public class Window extends JPanel {
 
     public JSpinner getSpinner() {
         return spinner;
+    }
+
+    public JToggleButton getEraser() {
+        return eraser;
     }
 }
