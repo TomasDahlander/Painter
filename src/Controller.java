@@ -25,7 +25,7 @@ public class Controller {
         setUpFillButtonListener();
         setUpSaveAndLoadButtonListener();
         setUpCustomColorButtonSetterListener();
-        setUpCustomColorButtonGettersListener();
+        setUpCustomColorButtonGetterListener();
     }
 
     public void setUpColorChooserListener(){
@@ -108,7 +108,7 @@ public class Controller {
         });
     }
 
-    public void setUpCustomColorButtonGettersListener(){
+    public void setUpCustomColorButtonGetterListener(){
         window.getGetCustomColor1().addActionListener(l -> {
             color = window.getGetCustomColor1().getBackground();
             window.getChosenColor().setBackground(color);

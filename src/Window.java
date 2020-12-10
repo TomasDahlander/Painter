@@ -15,8 +15,6 @@ import static java.awt.Color.*;
  */
 public class Window extends JPanel {
 
-    Properties properties = new Properties();
-
     private int row = 75;
     private int col = 160;
     private int pixelSize = 6;
