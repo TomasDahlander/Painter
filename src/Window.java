@@ -1,7 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.io.FileInputStream;
 import java.util.*;
 import java.util.List;
 
@@ -15,39 +15,43 @@ import static java.awt.Color.*;
  */
 public class Window extends JPanel {
 
-    private int row = 75;
-    private int col = 160;
-    private int pixelSize = 6;
+    private final int row = 80;
+    private final int col = 175;
+    private final int pixelSize = 6;
     private final Color[]colors = {WHITE,LIGHT_GRAY,GRAY,DARK_GRAY,BLACK,BLUE,CYAN,GREEN,new Color(135, 86, 56),MAGENTA,PINK,RED,ORANGE,YELLOW};
 
     // Panels
-    private JPanel buttonPanel = new JPanel(new FlowLayout());
-    private JPanel labelPanel = new JPanel(new GridLayout(row,col));
-    private JPanel southPanel = new JPanel(new FlowLayout());
+    private final JPanel buttonPanel = new JPanel(new FlowLayout());
+    private final JPanel labelPanel = new JPanel(new GridLayout(row,col));
+    private final JPanel southPanel = new JPanel(new FlowLayout());
 
     // Labels
-    private JLabel chosenColor = new JLabel("Chosen color",SwingConstants.CENTER);
-    private JLabel customColorLabel = new JLabel("Choose between 0-255 of Red, Green and Blue:");
+    private final JLabel chosenColor = new JLabel("Chosen color",SwingConstants.CENTER);
+    private final JLabel customColorLabel = new JLabel("Choose between 0-255 of Red, Green and Blue:");
+    private final JLabel saveSlot = new JLabel("Slot");
 
     // Textfields R G B
-    private JTextField colorRed = new JTextField("0",3);
-    private JTextField colorGreen = new JTextField("0",3);
-    private JTextField colorBlue = new JTextField("0",3);
+    private final JTextField colorRed = new JTextField("0",3);
+    private final JTextField colorGreen = new JTextField("0",3);
+    private final JTextField colorBlue = new JTextField("0",3);
 
     // Buttons
-    private JButton cleanButton = new JButton("Clear All");
-    private JButton fillButton = new JButton("Fill All Unpainted");
-    private JButton saveButton = new JButton("Quick Save");
-    private JButton loadButton = new JButton("Quick Load");
-    private JButton setCustomColor1 = new JButton("Set Color 1");
-    private JButton getCustomColor1 = new JButton("Get Color 1");
-    private JButton setCustomColor2 = new JButton("Set Color 2");
-    private JButton getCustomColor2 = new JButton("Get Color 2");
+    private final JButton cleanButton = new JButton("Clear All");
+    private final JButton fillButton = new JButton("Fill All Unpainted");
+    private final JButton saveButton = new JButton("Quick Save");
+    private final JButton loadButton = new JButton("Quick Load");
+    private final JButton setCustomColor1 = new JButton("Set Color 1");
+    private final JButton getCustomColor1 = new JButton("Get Color 1");
+    private final JButton setCustomColor2 = new JButton("Set Color 2");
+    private final JButton getCustomColor2 = new JButton("Get Color 2");
+
+    // Spinner
+    private JSpinner spinner;
 
     // Lists
-    private List<JButton> colorButtons = new ArrayList<>();
+    private final List<JButton> colorButtons = new ArrayList<>();
 
-    private List<Pixel> pixels = new ArrayList<>();
+    private final List<Pixel> pixels = new ArrayList<>();
 
     public Window(){
         this.setLayout(new BorderLayout());
@@ -59,6 +63,7 @@ public class Window extends JPanel {
         addLabelsToPanel();
         addButtonsToPanel();
         addComponentsToSouthPanels();
+        setUpSpinner();
     }
 
     private void addLabelsToPanel(){
@@ -130,6 +135,12 @@ public class Window extends JPanel {
         }
     }
 
+    public void setUpSpinner(){
+        buttonPanel.add(saveSlot);
+        spinner = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));
+        buttonPanel.add(spinner);
+    }
+
     // Getters
     public List<JButton> getColorButtons() {
         return colorButtons;
@@ -185,5 +196,9 @@ public class Window extends JPanel {
 
     public JButton getGetCustomColor2() {
         return getCustomColor2;
+    }
+
+    public JSpinner getSpinner() {
+        return spinner;
     }
 }

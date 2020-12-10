@@ -19,7 +19,6 @@ public class Pixel implements Serializable {
         pixel.setOpaque(true);
         pixel.setBackground(Color.WHITE);
         pixel.setPreferredSize(new Dimension(labelSideSize,labelSideSize));
-
     }
 
     public JLabel getPixel() {

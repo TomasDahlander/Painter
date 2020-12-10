@@ -11,11 +11,13 @@ import java.util.List;
  */
 public class Controller {
 
-    Window window;
-    Database database = new Database();
-    Color color = Color.WHITE;
-    ColorValidater colorValidater = new ColorValidater();
-    boolean pressed;
+    private Window window;
+    private Database database = new Database();
+    private Color color = Color.WHITE;
+    private ColorValidater colorValidater = new ColorValidater();
+    private boolean pressed;
+    private int slot = 1;
+
 
     public Controller(Window window){
         this.window = window;
@@ -26,6 +28,7 @@ public class Controller {
         setUpSaveAndLoadButtonListener();
         setUpCustomColorButtonSetterListener();
         setUpCustomColorButtonGetterListener();
+        setUpSpinnerListener();
     }
 
     public void setUpColorChooserListener(){
@@ -80,12 +83,16 @@ public class Controller {
 
     public void setUpSaveAndLoadButtonListener(){
         window.getSaveButton().addActionListener(l -> {
-            database.saveToMemory(window.getPixels());
+            database.saveToMemory(window.getPixels(),slot);
         });
 
         window.getLoadButton().addActionListener(l -> {
-            List<Pixel> pixelsFromMemory = database.loadFromMemory();
-            window.writePixelsFromMemory(pixelsFromMemory);
+            try {
+                List<Pixel> pixelsFromMemory = database.loadFromMemory(slot);
+                window.writePixelsFromMemory(pixelsFromMemory);
+            }catch(Exception e){
+                // File could not be found and this is handled in the database.
+            }
         });
     }
 
@@ -120,4 +127,9 @@ public class Controller {
         });
     }
 
+    public void setUpSpinnerListener(){
+        window.getSpinner().addChangeListener(l -> {
+            slot = Integer.parseInt(window.getSpinner().getValue()+"");
+        });
+    }
 }

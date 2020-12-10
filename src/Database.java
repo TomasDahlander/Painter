@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class Database {
 
-    public void saveToMemory(List<Pixel> list){
-        try(ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(new File("Saved painting.ser")))){
+    public void saveToMemory(List<Pixel> list, int slot){
+        String fileName = "Savefiles\\Saved paintings nr " + slot + ".ser";
+        try(ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(new File(fileName)))){
 
             objectOut.writeObject(list);
 
@@ -24,9 +25,10 @@ public class Database {
         }
     }
 
-    public List<Pixel> loadFromMemory(){
+    public List<Pixel> loadFromMemory(int slot){
         List<Pixel> pixels = new ArrayList<>();
-        try(ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(new File("Saved painting.ser")))) {
+        String fileName = "Savefiles\\Saved paintings nr " + slot + ".ser";
+        try(ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(new File(fileName)))) {
 
             pixels = (ArrayList)objectIn.readObject();
 
