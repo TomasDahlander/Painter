@@ -14,7 +14,7 @@ import static java.awt.Color.*;
  */
 public class Window extends JPanel {
 
-    private final int row = 80;
+    private final int row = 85;
     private final int col = 175;
     private final int pixelSize = 6;
     private final Color[]colors = {WHITE,LIGHT_GRAY,GRAY,DARK_GRAY,BLACK,BLUE,CYAN,GREEN,new Color(135, 86, 56),MAGENTA,PINK,RED,ORANGE,YELLOW};
@@ -34,6 +34,7 @@ public class Window extends JPanel {
     private final JButton loadButton = new JButton("Quick Load");
     private final JButton getCustomColorButton = new JButton("Get Custom Color");
     private final JToggleButton eraserButton = new JToggleButton("Eraser mode off");
+    private final JToggleButton drawRectangleButton = new JToggleButton("Rectangle mode off");
 
     // Spinner
     private final JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));
@@ -125,9 +126,11 @@ public class Window extends JPanel {
         southCenter.add(sliderBlue);
         southPanel.add(southCenter);
 
-        JPanel southEast = new JPanel(new GridLayout(2,1));
+        JPanel southEast = new JPanel(new GridLayout(3,1));
+        getCustomColorButton.setBackground(WHITE);
         southEast.add(getCustomColorButton);
         southEast.add(eraserButton);
+        southEast.add(drawRectangleButton);
         southPanel.add(southEast);
     }
 
@@ -202,5 +205,9 @@ public class Window extends JPanel {
 
     public JSlider getSliderBlue() {
         return sliderBlue;
+    }
+
+    public JToggleButton getDrawRectangleButton() {
+        return drawRectangleButton;
     }
 }

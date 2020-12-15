@@ -12,8 +12,7 @@ public class Database {
 
     private static final Database INSTANCE = new Database();
 
-    private Database(){
-    }
+    private Database(){}
 
     public static Database getInstance(){
         return INSTANCE;

@@ -32,6 +32,7 @@ public class Controller {
         setUpCustomColorButtonListener();
         setUpSpinnerListener();
         setUpEraser();
+        setUpRectangleButtonListener();
     }
 
     public void setUpColorChooserListener(){
@@ -142,5 +143,9 @@ public class Controller {
                 window.getEraserButton().setText("Eraser mode off");
             }
         });
+    }
+
+    public void setUpRectangleButtonListener(){
+        // fortsätt här med att skapa rektangel ritare
     }
 }
