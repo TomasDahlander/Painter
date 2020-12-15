@@ -14,10 +14,12 @@ public class Controller {
     private Window window;
     private Database database = new Database();
     private Color color = Color.WHITE;
-    private ColorValidater colorValidater = new ColorValidater();
+    private int r = 0;
+    private int g = 0;
+    private int b = 0;
     private boolean pressed;
     private int slot = 1;
-    private boolean eraserMode = true; // True = eraser is not on. False = it will set painted to false.
+    private boolean eraserMode = true; // When false it will set painted to false.
 
     public Controller(Window window){
         this.window = window;
@@ -26,8 +28,8 @@ public class Controller {
         setUpCleaningButtonListener();
         setUpFillButtonListener();
         setUpSaveAndLoadButtonListener();
-        setUpCustomColorButtonSetterListener();
-        setUpCustomColorButtonGetterListener();
+        setUpSliderListeners();
+        setUpCustomColorButtonListener();
         setUpSpinnerListener();
         setUpEraser();
     }
@@ -69,7 +71,7 @@ public class Controller {
     }
 
     public void setUpCleaningButtonListener(){
-        window.getCleanButton().addActionListener(l -> {
+        window.getClearButton().addActionListener(l -> {
             window.clearAll();
             window.revalidate();
             window.repaint();
@@ -97,52 +99,47 @@ public class Controller {
         });
     }
 
-    public void setUpCustomColorButtonSetterListener(){
-        window.getSetCustomColor1().addActionListener(l -> {
-
-            int r = colorValidater.checkInput(window.getColorRed());
-            int g = colorValidater.checkInput(window.getColorGreen());
-            int b = colorValidater.checkInput(window.getColorBlue());
-
-            window.getGetCustomColor1().setBackground(colorValidater.checkColor(r,g,b));
+    public void setUpSliderListeners(){
+        window.getSliderRed().addChangeListener(l ->{
+            r = window.getSliderRed().getValue();
+            window.getGetCustomColorButton().setBackground(new Color(r,g,b));
+            window.getSliderRed().repaint();
         });
-        window.getSetCustomColor2().addActionListener(l -> {
-
-            int r = colorValidater.checkInput(window.getColorRed());
-            int g = colorValidater.checkInput(window.getColorGreen());
-            int b = colorValidater.checkInput(window.getColorBlue());
-
-            window.getGetCustomColor2().setBackground(colorValidater.checkColor(r,g,b));
+        window.getSliderGreen().addChangeListener(l ->{
+            g = window.getSliderGreen().getValue();
+            window.getGetCustomColorButton().setBackground(new Color(r,g,b));
+            window.getSliderGreen().repaint();
         });
+        window.getSliderBlue().addChangeListener(l ->{
+            b = window.getSliderBlue().getValue();
+            window.getGetCustomColorButton().setBackground(new Color(r,g,b));
+            window.getSliderBlue().repaint();
+        });
+
     }
 
-    public void setUpCustomColorButtonGetterListener(){
-        window.getGetCustomColor1().addActionListener(l -> {
-            color = window.getGetCustomColor1().getBackground();
-            window.getChosenColor().setBackground(color);
-        });
-
-        window.getGetCustomColor2().addActionListener(l -> {
-            color = window.getGetCustomColor2().getBackground();
+    public void setUpCustomColorButtonListener(){
+        window.getGetCustomColorButton().addActionListener(l->{
+            color = window.getGetCustomColorButton().getBackground();
             window.getChosenColor().setBackground(color);
         });
     }
 
     public void setUpSpinnerListener(){
         window.getSpinner().addChangeListener(l -> {
-            slot = Integer.parseInt(window.getSpinner().getValue()+"");
+            slot = Integer.parseInt(String.valueOf(window.getSpinner().getValue()));
         });
     }
 
     public void setUpEraser(){
-        window.getEraser().addActionListener(l -> {
-            if(window.getEraser().isSelected()){
+        window.getEraserButton().addActionListener(l -> {
+            if(window.getEraserButton().isSelected()){
                 eraserMode = false;
-                window.getEraser().setText("Eraser mode on");
+                window.getEraserButton().setText("Eraser mode on");
             }
             else {
                 eraserMode = true;
-                window.getEraser().setText("Eraser mode off");
+                window.getEraserButton().setText("Eraser mode off");
             }
         });
     }

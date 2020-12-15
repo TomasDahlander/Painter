@@ -9,11 +9,11 @@ import javax.swing.*;
 public class Painter extends JFrame {
 
     Window window = new Window();
-    Controller actionController;
+    Controller controller;
 
     public Painter(){
         add(window);
-        actionController = new Controller(window);
+        controller = new Controller(window);
 
         setUpFrame();
     }
