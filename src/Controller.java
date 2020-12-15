@@ -17,7 +17,7 @@ public class Controller {
     private ColorValidater colorValidater = new ColorValidater();
     private boolean pressed;
     private int slot = 1;
-    private boolean eraserMode = true; // True = eraser is not on. False = it will set painted to false.
+    private boolean eraserMode = true; // When false it will set painted to false.
 
     public Controller(Window window){
         this.window = window;
