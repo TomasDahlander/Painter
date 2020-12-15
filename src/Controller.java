@@ -12,12 +12,12 @@ import java.util.List;
 public class Controller {
 
     private Window window;
-    private Database database = new Database();
+    private Database database = Database.getInstance();
     private Color color = Color.WHITE;
     private int r = 0;
     private int g = 0;
     private int b = 0;
-    private boolean pressed;
+    private boolean pressed; // If the left mousebutton is pressed or not
     private int slot = 1;
     private boolean eraserMode = true; // When false it will set painted to false.
 
@@ -25,7 +25,7 @@ public class Controller {
         this.window = window;
         setUpColorChooserListener();
         setUpLabelWriterListener();
-        setUpCleaningButtonListener();
+        setUpClearingButtonListener();
         setUpFillButtonListener();
         setUpSaveAndLoadButtonListener();
         setUpSliderListeners();
@@ -70,7 +70,7 @@ public class Controller {
         }
     }
 
-    public void setUpCleaningButtonListener(){
+    public void setUpClearingButtonListener(){
         window.getClearButton().addActionListener(l -> {
             window.clearAll();
             window.revalidate();

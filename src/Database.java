@@ -11,6 +11,14 @@ import java.util.List;
  */
 public class Database {
 
+    private static final Database SINGLE_INSTANCE = new Database();
+
+    private Database(){}
+
+    public static Database getInstance(){
+        return SINGLE_INSTANCE;
+    }
+
     public void saveToMemory(List<Pixel> list, int slot){
         String fileName = "Savefiles\\Saved paintings nr " + slot + ".ser";
         try(ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(new File(fileName)))){
