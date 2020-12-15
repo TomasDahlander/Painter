@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +10,13 @@ import java.util.List;
  */
 public class Database {
 
-    private static final Database SINGLE_INSTANCE = new Database();
+    private static final Database INSTANCE = new Database();
 
     private Database(){
     }
 
     public static Database getInstance(){
-        return SINGLE_INSTANCE;
+        return INSTANCE;
     }
 
     public void saveToMemory(List<Pixel> list, int slot){
