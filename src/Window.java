@@ -164,11 +164,11 @@ public class Window extends JPanel {
         }
     }
 
-    public void writeRectangle(Rectangle rec, Color color){ // Denna ska ta emot en Rectangle istället som innehåller två Grids
+    public void writeRectangle(Rectangle rec, Color color, boolean paint){
         for (int i = rec.getTopLeft().getRow(); i <= rec.getBottomRight().getRow(); i++){
             for (int j = rec.getTopLeft().getCol(); j <= rec.getBottomRight().getCol(); j++){
                 pixels[i][j].getPixel().setBackground(color);
-                pixels[i][j].setPainted(true);
+                pixels[i][j].setPainted(paint);
             }
         }
     }

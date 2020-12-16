@@ -16,7 +16,7 @@ public class Controller {
     private int r = 0;
     private int g = 0;
     private int b = 0;
-    private boolean pressed; // If the left mousebutton is pressed or not
+    private boolean pressed;
     private int slot = 1;
     private boolean eraserMode = true; // When false it will set painted to false.
     private boolean rectangleMode = false; // When true rectangle will be drawn.
@@ -71,7 +71,7 @@ public class Controller {
                             pressed = false;
 
                             Rectangle rectangle = new Rectangle(startGrid,endGrid);
-                            window.writeRectangle(rectangle, color);
+                            window.writeRectangle(rectangle, color, eraserMode);
                         }
                         else pressed = false;
                     }
@@ -175,7 +175,6 @@ public class Controller {
             else {
                 rectangleMode = false;
                 window.getDrawRectangleButton().setText("Rectangle mode off");
-                System.out.println("Grid is in same place: " + startGrid.equals(endGrid));
             }
         });
     }
