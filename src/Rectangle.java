@@ -33,6 +33,7 @@ public class Rectangle {
 
         for (int i = 0; i < list.size(); i++){
             int sum = list.get(i).getRow() + list.get(i).getCol();
+
             if (sum < topLeftGridValue){
                 topLeftGridValue = sum;
                 indexTopLeft = i;

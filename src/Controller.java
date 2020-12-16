@@ -16,10 +16,10 @@ public class Controller {
     private int r = 0;
     private int g = 0;
     private int b = 0;
-    private boolean pressed;
+    private boolean mouseIsPressed;
     private int slot = 1;
-    private boolean eraserMode = true; // When false it will set painted to false.
-    private boolean rectangleMode = false; // When true rectangle will be drawn.
+    private boolean eraserModeOff = true; // When false it will set painted to false.
+    private boolean rectangleModeOn = false; // When true rectangle will be drawn.
     private Grid startGrid;
     private Grid endGrid;
 
@@ -54,35 +54,35 @@ public class Controller {
                 MouseAdapter writer = new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        if(rectangleMode){
-                            pressed = true;
+                        if(rectangleModeOn){
+                            mouseIsPressed = true;
                             startGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
                         }
                         else {
-                            pressed = true;
+                            mouseIsPressed = true;
                             window.getPixels()[finalI][finalJ].getPixel().setBackground(color);
-                            window.getPixels()[finalI][finalJ].setPainted(eraserMode);
+                            window.getPixels()[finalI][finalJ].setPainted(eraserModeOff);
                         }
                     }
 
                     @Override
                     public void mouseReleased(MouseEvent e) {
-                        if(rectangleMode){
-                            pressed = false;
+                        if(rectangleModeOn){
+                            mouseIsPressed = false;
 
                             Rectangle rectangle = new Rectangle(startGrid,endGrid);
-                            window.writeRectangle(rectangle, color, eraserMode);
+                            window.writeRectangle(rectangle, color, eraserModeOff);
                         }
-                        else pressed = false;
+                        else mouseIsPressed = false;
                     }
 
                     @Override
                     public void mouseEntered(MouseEvent e) {
-                        if (!rectangleMode && pressed){
+                        if (!rectangleModeOn && mouseIsPressed){
                             window.getPixels()[finalI][finalJ].getPixel().setBackground(color);
-                            window.getPixels()[finalI][finalJ].setPainted(eraserMode);
+                            window.getPixels()[finalI][finalJ].setPainted(eraserModeOff);
                         }
-                        else if(rectangleMode && pressed){
+                        else if(rectangleModeOn && mouseIsPressed){
                             endGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
                         }
                     }
@@ -156,11 +156,11 @@ public class Controller {
     public void setUpEraser(){
         window.getEraserButton().addActionListener(l -> {
             if(window.getEraserButton().isSelected()){
-                eraserMode = false;
+                eraserModeOff = false;
                 window.getEraserButton().setText("Eraser mode on");
             }
             else {
-                eraserMode = true;
+                eraserModeOff = true;
                 window.getEraserButton().setText("Eraser mode off");
             }
         });
@@ -169,11 +169,11 @@ public class Controller {
     public void setUpRectangleButtonListener(){
         window.getDrawRectangleButton().addActionListener(l -> {
             if (window.getDrawRectangleButton().isSelected()){
-                rectangleMode = true;
+                rectangleModeOn = true;
                 window.getDrawRectangleButton().setText("Rectangle mode on");
             }
             else {
-                rectangleMode = false;
+                rectangleModeOn = false;
                 window.getDrawRectangleButton().setText("Rectangle mode off");
             }
         });
