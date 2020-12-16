@@ -46,7 +46,7 @@ public class Window extends JPanel {
 
     // Lists
     private final List<JButton> colorButtons = new ArrayList<>();
-    private final List<Pixel> pixels = new ArrayList<>();
+    private final Pixel[][] pixels = new Pixel[row][col];
 
     public Window(){
         this.setLayout(new BorderLayout());
@@ -106,9 +106,11 @@ public class Window extends JPanel {
     }
 
     private void addPixelsToCenterPanel(){
-        for(int i = 0; i < (row*col); i++){
-            pixels.add(new Pixel(pixelSize));
-            centerPanel.add(pixels.get(i).getPixel());
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                pixels[i][j] = new Pixel(pixelSize,i,j);
+                centerPanel.add(pixels[i][j].getPixel());
+            }
         }
         centerPanel.setBorder(new EtchedBorder());
     }
@@ -135,22 +137,38 @@ public class Window extends JPanel {
     }
 
     public void clearAll(){
-        for (var l : pixels){
-            l.getPixel().setBackground(WHITE);
-            l.setPainted(false);
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                pixels[i][j].getPixel().setBackground(WHITE);
+                pixels[i][j].setPainted(false);
+            }
         }
     }
 
     public void fillAll(Color color){
-        for (var l : pixels){
-            if (!l.isPainted()) l.getPixel().setBackground(color);
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                if (!pixels[i][j].isPainted()) {
+                    pixels[i][j].getPixel().setBackground(color);
+                }
+            }
         }
     }
 
-    public void writePixelsFromMemory(List<Pixel> fromMemory){
-        for (int i = 0; i < pixels.size(); i++){
-            pixels.get(i).getPixel().setBackground(fromMemory.get(i).getPixel().getBackground());
-            pixels.get(i).setPainted(fromMemory.get(i).isPainted());
+    public void writePixelsFromMemory(Pixel[][] fromMemory){
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                pixels[i][j].getPixel().setBackground(fromMemory[i][j].getPixel().getBackground());
+                pixels[i][j].setPainted(fromMemory[i][j].isPainted());
+            }
+        }
+    }
+
+    public void writeRectangle(Grid start, Grid end , Color color){
+        for (int i = start.getRow(); i <= end.getRow(); i++){
+            for (int j = start.getCol(); j <= end.getCol(); j++){
+                pixels[i][j].getPixel().setBackground(color);
+            }
         }
     }
 
@@ -159,7 +177,15 @@ public class Window extends JPanel {
         return colorButtons;
     }
 
-    public List<Pixel> getPixels() {
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public Pixel[][] getPixels() {
         return pixels;
     }
 

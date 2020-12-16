@@ -18,11 +18,11 @@ public class Database {
         return INSTANCE;
     }
 
-    public void saveToMemory(List<Pixel> list, int slot){
-        String fileName = "Savefiles\\Saved paintings nr " + slot + ".ser";
+    public void saveToMemory(Pixel[][] array, int slot){
+        String fileName = "Savefiles\\Saved painting nr " + slot + ".ser";
         try(ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(new File(fileName)))){
 
-            objectOut.writeObject(list);
+            objectOut.writeObject(array);
 
         }catch(FileNotFoundException e){
             System.out.println("Could not find file.");
@@ -32,13 +32,13 @@ public class Database {
         }
     }
 
-    public List<Pixel> loadFromMemory(int slot){
-        List<Pixel> pixels = new ArrayList<>();
-        String fileName = "Savefiles\\Saved paintings nr " + slot + ".ser";
+    public Pixel[][] loadFromMemory(int slot){
+        Pixel[][] pixels;
+        String fileName = "Savefiles\\Saved painting nr " + slot + ".ser";
         try(ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(new File(fileName)))) {
 
-            pixels = (ArrayList)objectIn.readObject();
-
+            pixels = (Pixel[][])objectIn.readObject();
+            return pixels;
         }catch(FileNotFoundException e) {
             System.out.println("Could not find file.");
             e.printStackTrace();
@@ -49,6 +49,7 @@ public class Database {
             System.out.println("Could not write to file");
             e.printStackTrace();
         }
-        return pixels;
+        return null;
     }
+
 }

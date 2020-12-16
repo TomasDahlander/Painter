@@ -12,9 +12,12 @@ public class Pixel implements Serializable {
 
     private JLabel pixel;
     private boolean painted;
+    private Grid grid;
 
-    public Pixel(int labelSideSize){
-        pixel = new JLabel();
+    public Pixel(int labelSideSize, int row, int col){
+        this.pixel = new JLabel();
+        this.grid = new Grid(row,col);
+
         painted = false;
         pixel.setOpaque(true);
         pixel.setBackground(Color.WHITE);
@@ -31,5 +34,9 @@ public class Pixel implements Serializable {
 
     public void setPainted(boolean painted) {
         this.painted = painted;
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }

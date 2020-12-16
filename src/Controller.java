@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
 /**
  * Created by Tomas Dahlander <br>
@@ -20,6 +19,9 @@ public class Controller {
     private boolean pressed; // If the left mousebutton is pressed or not
     private int slot = 1;
     private boolean eraserMode = true; // When false it will set painted to false.
+    private boolean rectangleMode = false; // When true rectangle will be drawn.
+    private Grid startGrid;
+    private Grid endGrid;
 
     public Controller(Window window){
         this.window = window;
@@ -45,29 +47,47 @@ public class Controller {
     }
 
     public void setUpLabelWriterListener(){
-        for (var l : window.getPixels()){
-            MouseAdapter writer = new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    pressed = true;
-                    l.getPixel().setBackground(color);
-                    l.setPainted(eraserMode);
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    pressed = false;
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    if (pressed) {
-                        l.getPixel().setBackground(color);
-                        l.setPainted(eraserMode);
+        for (int i = 0; i < window.getRow(); i++){
+            for (int j = 0; j < window.getCol(); j++){
+                int finalI = i;
+                int finalJ = j;
+                MouseAdapter writer = new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        if(rectangleMode){
+                            pressed = true;
+                            startGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
+                            System.out.println("Start: " + startGrid.getRow() + " - " + startGrid.getCol());
+                        }
+                        else {
+                            pressed = true;
+                            window.getPixels()[finalI][finalJ].getPixel().setBackground(color);
+                            window.getPixels()[finalI][finalJ].setPainted(eraserMode);
+                        }
                     }
-                }
-            };
-            l.getPixel().addMouseListener(writer);
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        if(rectangleMode){
+                            pressed = false;
+                            window.writeRectangle(startGrid, endGrid, color);
+                        }
+                        else pressed = false;
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        if (!rectangleMode && pressed){
+                            window.getPixels()[finalI][finalJ].getPixel().setBackground(color);
+                            window.getPixels()[finalI][finalJ].setPainted(eraserMode);
+                        }
+                        else if(rectangleMode && pressed){
+                            endGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
+                        }
+                    }
+                };
+                window.getPixels()[finalI][finalJ].getPixel().addMouseListener(writer);
+            }
         }
     }
 
@@ -92,7 +112,7 @@ public class Controller {
 
         window.getLoadButton().addActionListener(l -> {
             try {
-                List<Pixel> pixelsFromMemory = database.loadFromMemory(slot);
+                Pixel[][] pixelsFromMemory = database.loadFromMemory(slot);
                 window.writePixelsFromMemory(pixelsFromMemory);
             }catch(Exception e){
                 // File could not be found and this is handled in the database.
@@ -146,6 +166,18 @@ public class Controller {
     }
 
     public void setUpRectangleButtonListener(){
-        // fortsätt här med att skapa rektangel ritare
+        window.getDrawRectangleButton().addActionListener(l -> {
+            if (window.getDrawRectangleButton().isSelected()){
+                rectangleMode = true;
+                window.getDrawRectangleButton().setText("Rectangle mode on");
+            }
+            else {
+                rectangleMode = false;
+                window.getDrawRectangleButton().setText("Rectangle mode off");
+                System.out.println("Grid is in same place: " + startGrid.equals(endGrid));
+            }
+        });
     }
+
+
 }
