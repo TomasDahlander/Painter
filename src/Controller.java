@@ -57,7 +57,6 @@ public class Controller {
                         if(rectangleMode){
                             pressed = true;
                             startGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
-                            System.out.println("Start: " + startGrid.getRow() + " - " + startGrid.getCol());
                         }
                         else {
                             pressed = true;
@@ -70,7 +69,9 @@ public class Controller {
                     public void mouseReleased(MouseEvent e) {
                         if(rectangleMode){
                             pressed = false;
-                            window.writeRectangle(startGrid, endGrid, color);
+
+                            Rectangle rectangle = new Rectangle(startGrid,endGrid);
+                            window.writeRectangle(rectangle, color);
                         }
                         else pressed = false;
                     }
