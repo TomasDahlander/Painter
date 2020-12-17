@@ -32,15 +32,15 @@ public class Rectangle {
         int indexBottomRight = 0;
 
         for (int i = 0; i < list.size(); i++){
-            int sum = list.get(i).getRow() + list.get(i).getCol();
+            int gridValue = list.get(i).getGridValue();
 
-            if (sum < topLeftGridValue){
-                topLeftGridValue = sum;
+            if (gridValue < topLeftGridValue){
+                topLeftGridValue = gridValue;
                 indexTopLeft = i;
             }
 
-            if (sum > bottomRightGridValue){
-                bottomRightGridValue = sum;
+            if (gridValue > bottomRightGridValue){
+                bottomRightGridValue = gridValue;
                 indexBottomRight = i;
             }
         }

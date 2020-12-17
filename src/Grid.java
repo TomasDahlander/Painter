@@ -28,6 +28,10 @@ public class Grid implements Serializable {
         return col;
     }
 
+    public int getGridValue() {
+        return row + col;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
