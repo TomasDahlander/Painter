@@ -10,8 +10,9 @@ import java.awt.event.MouseEvent;
  */
 public class Controller {
 
-    private Window window;
-    private Database database = Database.getInstance();
+    private final Window window;
+    private final Database database = Database.getInstance();
+    private final RectangleFactory factory = new RectangleFactory();
     private Color color = Color.WHITE;
     private int r = 0;
     private int g = 0;
@@ -20,6 +21,9 @@ public class Controller {
     private int slot = 1;
     private boolean eraserModeOff = true; // When false it will set painted to false.
     private boolean rectangleModeOn = false; // When true rectangle will be drawn.
+
+    private int recrangleMode; // detta ska ändra mellan 0 och 1 i nuläget för vilken typ av rectangel beroende på vilken knapp
+
     private Grid startGrid;
     private Grid endGrid;
 
@@ -70,8 +74,16 @@ public class Controller {
                         if(rectangleModeOn){
                             mouseIsPressed = false;
 
-                            Rectangle rectangle = new Rectangle(startGrid,endGrid);
-                            window.writeRectangle(rectangle, color, eraserModeOff);
+//                            Rectangle rectangle = new Rectangle(startGrid,endGrid);
+//                            window.writeRectangle(rectangle, color, eraserModeOff);
+
+//                            AbstractRectangle rectangle = new HollowRectangle(startGrid, endGrid);
+//
+//                            rectangle.draw(window.getPixels(),color,eraserModeOff);
+
+                            AbstractRectangle rectrangle = factory.getRectangle(0,startGrid, endGrid); // inten ska ändras utav en knapp
+                            rectrangle.draw(window.getPixels(),color,eraserModeOff);
+
                         }
                         else mouseIsPressed = false;
                     }

@@ -62,7 +62,7 @@ public class Window extends JPanel {
         addComponentsToSouthPanels();
     }
 
-    public void setUpSliders(){
+    private void setUpSliders(){
         sliderRed = new JSlider(0,255,0);
         sliderRed.setMinorTickSpacing(3);
         sliderRed.setSnapToTicks(true);
