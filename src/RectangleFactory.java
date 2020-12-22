@@ -15,6 +15,6 @@ public class RectangleFactory {
         else if(type == 1) return new FullRectangle(start, end);
         else if (type == 2) return new PatternedRectangle(start, end);
 
-        else throw new IllegalArgumentException("Must contain an int for which rectangle needed.");
+        else throw new IllegalArgumentException("\nMust contain an int.\n0 = Hollowed\n1 = Full\n2 = Patterned");
     }
 }
