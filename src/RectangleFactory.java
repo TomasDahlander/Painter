@@ -8,10 +8,12 @@ public class RectangleFactory {
 
     public final static int HOLLOW_RECTANGLE = 0;
     public final static int FULL_RECTANGLE = 1  ;
+    public final static int PATTERNED_RECTANGLE = 2;
 
     public Rectangle getRectangle(int type, Grid start, Grid end){
         if(type == 0) return new HollowRectangle(start, end);
         else if(type == 1) return new FullRectangle(start, end);
+        else if (type == 2) return new PatternedRectangle(start, end);
 
         else throw new IllegalArgumentException("Must contain an int for which rectangle needed.");
     }

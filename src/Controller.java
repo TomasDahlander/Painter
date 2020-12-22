@@ -64,8 +64,7 @@ public class Controller {
                         }
                         else {
                             mouseIsPressed = true;
-                            window.getPixels()[finalI][finalJ].getPixel().setBackground(color);
-                            window.getPixels()[finalI][finalJ].setPainted(eraserModeOff);
+                            window.getPixels()[finalI][finalJ].paint(color, eraserModeOff);
                         }
                     }
 
@@ -84,8 +83,7 @@ public class Controller {
                     @Override
                     public void mouseEntered(MouseEvent e) {
                         if (!rectangleModeOn && mouseIsPressed){
-                            window.getPixels()[finalI][finalJ].getPixel().setBackground(color);
-                            window.getPixels()[finalI][finalJ].setPainted(eraserModeOff);
+                            window.getPixels()[finalI][finalJ].paint(color, eraserModeOff);
                         }
                         else if(rectangleModeOn && mouseIsPressed){
                             endGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
@@ -191,6 +189,10 @@ public class Controller {
 
         window.getHollowRectangle().addActionListener(l -> {
             rectangleMode = RectangleFactory.HOLLOW_RECTANGLE;
+        });
+
+        window.getPatternedRectangle().addActionListener(l -> {
+            rectangleMode = RectangleFactory.PATTERNED_RECTANGLE;
         });
     }
 

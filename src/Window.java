@@ -37,6 +37,7 @@ public class Window extends JPanel {
     private final JToggleButton drawRectangleButton = new JToggleButton("Rectangle mode off");
     private final JRadioButton fullRectangle = new JRadioButton("Full rectangle",true);
     private final JRadioButton hollowRectangle = new JRadioButton("Hollow rectangle");
+    private final JRadioButton patternedRectangle = new JRadioButton("Patterned rectangle");
 
     // Spinner
     private final JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));
@@ -130,20 +131,21 @@ public class Window extends JPanel {
         southCenter.add(sliderBlue);
         southPanel.add(southCenter);
 
+        JPanel southEast = new JPanel(new GridLayout(3,2));
         getCustomColorButton.setBackground(WHITE);
-        southPanel.add(getCustomColorButton);
-
-        JPanel southEast = new JPanel(new GridLayout(2,2));
-        southEast.add(eraserButton);
+        southEast.add(getCustomColorButton);
         southEast.add(fullRectangle);
-        southEast.add(drawRectangleButton);
+        southEast.add(eraserButton);
         southEast.add(hollowRectangle);
+        southEast.add(drawRectangleButton);
+        southEast.add(patternedRectangle);
+
+        southPanel.add(southEast);
 
         ButtonGroup group = new ButtonGroup();
         group.add(fullRectangle);
         group.add(hollowRectangle);
-
-        southPanel.add(southEast);
+        group.add(patternedRectangle);
     }
 
     public void clearAll(){
@@ -245,5 +247,9 @@ public class Window extends JPanel {
 
     public JRadioButton getFullRectangle() {
         return fullRectangle;
+    }
+
+    public JRadioButton getPatternedRectangle() {
+        return patternedRectangle;
     }
 }

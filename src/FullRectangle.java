@@ -17,8 +17,7 @@ public class FullRectangle extends Rectangle {
     public void draw(Pixel[][] pixels, Color color, boolean paint) {
         for (int i = topLeft.getRow(); i <= bottomRight.getRow(); i++){
             for (int j = topLeft.getCol(); j <= bottomRight.getCol(); j++){
-                pixels[i][j].getPixel().setBackground(color);
-                pixels[i][j].setPainted(paint);
+                pixels[i][j].paint(color, paint);
             }
         }
     }
