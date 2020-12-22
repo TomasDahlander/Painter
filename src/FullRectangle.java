@@ -6,7 +6,7 @@ import java.awt.*;
  * Time: 21:48 <br>
  * Project: Painter <br>
  */
-public class FullRectangle extends AbstractRectangle {
+public class FullRectangle extends Rectangle {
 
 
     public FullRectangle(Grid start, Grid end) {

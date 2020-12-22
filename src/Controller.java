@@ -21,8 +21,7 @@ public class Controller {
     private int slot = 1;
     private boolean eraserModeOff = true; // When false it will set painted to false.
     private boolean rectangleModeOn = false; // When true rectangle will be drawn.
-
-    private int recrangleMode; // detta ska ändra mellan 0 och 1 i nuläget för vilken typ av rectangel beroende på vilken knapp
+    private int rectangleMode = 1;
 
     private Grid startGrid;
     private Grid endGrid;
@@ -39,6 +38,7 @@ public class Controller {
         setUpSpinnerListener();
         setUpEraser();
         setUpRectangleButtonListener();
+        setUpRectangleModeRadioButtonListener();
     }
 
     public void setUpColorChooserListener(){
@@ -74,14 +74,7 @@ public class Controller {
                         if(rectangleModeOn){
                             mouseIsPressed = false;
 
-//                            Rectangle rectangle = new Rectangle(startGrid,endGrid);
-//                            window.writeRectangle(rectangle, color, eraserModeOff);
-
-//                            AbstractRectangle rectangle = new HollowRectangle(startGrid, endGrid);
-//
-//                            rectangle.draw(window.getPixels(),color,eraserModeOff);
-
-                            AbstractRectangle rectrangle = factory.getRectangle(0,startGrid, endGrid); // inten ska ändras utav en knapp
+                            Rectangle rectrangle = factory.getRectangle(rectangleMode,startGrid, endGrid);
                             rectrangle.draw(window.getPixels(),color,eraserModeOff);
 
                         }
@@ -191,5 +184,14 @@ public class Controller {
         });
     }
 
+    public void setUpRectangleModeRadioButtonListener(){
+        window.getFullRectangle().addActionListener(l -> {
+            rectangleMode = RectangleFactory.FULL_RECTANGLE;
+        });
+
+        window.getHollowRectangle().addActionListener(l -> {
+            rectangleMode = RectangleFactory.HOLLOW_RECTANGLE;
+        });
+    }
 
 }

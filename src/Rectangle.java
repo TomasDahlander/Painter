@@ -1,13 +1,14 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Tomas Dahlander <br>
- * Date: 2020-12-16 <br>
- * Time: 15:28 <br>
+ * Date: 2020-12-21 <br>
+ * Time: 21:42 <br>
  * Project: Painter <br>
  */
-public class Rectangle {
+public abstract class Rectangle {
 
     Grid topLeft;
     Grid bottomRight;
@@ -48,11 +49,5 @@ public class Rectangle {
         this.bottomRight = list.get(indexBottomRight);
     }
 
-    public Grid getTopLeft() {
-        return topLeft;
-    }
-
-    public Grid getBottomRight() {
-        return bottomRight;
-    }
+    public abstract void draw(Pixel[][] pixels, Color color, boolean paint);
 }

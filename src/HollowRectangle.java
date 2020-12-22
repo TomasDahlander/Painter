@@ -6,7 +6,7 @@ import java.awt.*;
  * Time: 21:38 <br>
  * Project: Painter <br>
  */
-public class HollowRectangle extends AbstractRectangle {
+public class HollowRectangle extends Rectangle {
 
     public HollowRectangle(Grid start, Grid end) {
         super(start, end);

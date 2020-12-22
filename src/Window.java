@@ -35,6 +35,8 @@ public class Window extends JPanel {
     private final JButton getCustomColorButton = new JButton("Get Custom Color");
     private final JToggleButton eraserButton = new JToggleButton("Eraser mode off");
     private final JToggleButton drawRectangleButton = new JToggleButton("Rectangle mode off");
+    private final JRadioButton fullRectangle = new JRadioButton("Full rectangle",true);
+    private final JRadioButton hollowRectangle = new JRadioButton("Hollow rectangle");
 
     // Spinner
     private final JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));
@@ -128,11 +130,19 @@ public class Window extends JPanel {
         southCenter.add(sliderBlue);
         southPanel.add(southCenter);
 
-        JPanel southEast = new JPanel(new GridLayout(3,1));
         getCustomColorButton.setBackground(WHITE);
-        southEast.add(getCustomColorButton);
+        southPanel.add(getCustomColorButton);
+
+        JPanel southEast = new JPanel(new GridLayout(2,2));
         southEast.add(eraserButton);
+        southEast.add(fullRectangle);
         southEast.add(drawRectangleButton);
+        southEast.add(hollowRectangle);
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(fullRectangle);
+        group.add(hollowRectangle);
+
         southPanel.add(southEast);
     }
 
@@ -160,15 +170,6 @@ public class Window extends JPanel {
             for (int j = 0; j < col; j++){
                 pixels[i][j].getPixel().setBackground(fromMemory[i][j].getPixel().getBackground());
                 pixels[i][j].setPainted(fromMemory[i][j].isPainted());
-            }
-        }
-    }
-
-    public void writeRectangle(Rectangle rec, Color color, boolean paint){
-        for (int i = rec.getTopLeft().getRow(); i <= rec.getBottomRight().getRow(); i++){
-            for (int j = rec.getTopLeft().getCol(); j <= rec.getBottomRight().getCol(); j++){
-                pixels[i][j].getPixel().setBackground(color);
-                pixels[i][j].setPainted(paint);
             }
         }
     }
@@ -236,5 +237,13 @@ public class Window extends JPanel {
 
     public JToggleButton getDrawRectangleButton() {
         return drawRectangleButton;
+    }
+
+    public JRadioButton getHollowRectangle() {
+        return hollowRectangle;
+    }
+
+    public JRadioButton getFullRectangle() {
+        return fullRectangle;
     }
 }
