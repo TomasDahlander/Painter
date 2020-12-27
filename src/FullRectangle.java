@@ -8,7 +8,6 @@ import java.awt.*;
  */
 public class FullRectangle extends Rectangle {
 
-
     public FullRectangle(Grid start, Grid end) {
         super(start, end);
     }
@@ -21,5 +20,4 @@ public class FullRectangle extends Rectangle {
             }
         }
     }
-
 }
