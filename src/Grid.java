@@ -32,6 +32,11 @@ public class Grid implements Serializable {
         return row + col;
     }
 
+    public void alterGridBySquare(int alteration){
+        this.row += alteration;
+        this.col += alteration;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

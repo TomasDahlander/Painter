@@ -191,9 +191,12 @@ public class Controller {
             rectangleMode = RectangleFactory.HOLLOW_RECTANGLE;
         });
 
-        window.getPatternedRectangle().addActionListener(l -> {
-            rectangleMode = RectangleFactory.PATTERNED_RECTANGLE;
+        window.getCheckedRectangle().addActionListener(l -> {
+            rectangleMode = RectangleFactory.CHECKED_RECTANGLE;
+        });
+
+        window.getLayeredRectangle().addActionListener(l -> {
+            rectangleMode = RectangleFactory.LAYERED_RECTANGLE;
         });
     }
-
 }

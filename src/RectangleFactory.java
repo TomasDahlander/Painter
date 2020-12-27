@@ -8,13 +8,15 @@ public class RectangleFactory {
 
     public final static int HOLLOW_RECTANGLE = 0;
     public final static int FULL_RECTANGLE = 1  ;
-    public final static int PATTERNED_RECTANGLE = 2;
+    public final static int CHECKED_RECTANGLE = 2;
+    public final static int LAYERED_RECTANGLE = 3;
 
     public Rectangle getRectangle(int type, Grid start, Grid end){
-        if(type == 0) return new HollowRectangle(start, end);
-        else if(type == 1) return new FullRectangle(start, end);
-        else if (type == 2) return new PatternedRectangle(start, end);
+        if(type == HOLLOW_RECTANGLE) return new HollowRectangle(start, end);
+        else if(type == FULL_RECTANGLE) return new FullRectangle(start, end);
+        else if (type == CHECKED_RECTANGLE) return new CheckedRectangle(start, end);
+        else if (type == LAYERED_RECTANGLE) return new LayeredRectangle(start, end);
 
-        else throw new IllegalArgumentException("\nMust contain an int.\n0 = Hollowed\n1 = Full\n2 = Patterned");
+        else throw new IllegalArgumentException("\nMust contain an int.\n0 = Hollowed\n1 = Full\n2 = Patterned\n3 = Layered");
     }
 }

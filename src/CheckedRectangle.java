@@ -6,9 +6,9 @@ import java.awt.*;
  * Time: 21:42 <br>
  * Project: Painter <br>
  */
-public class PatternedRectangle extends Rectangle{
+public class CheckedRectangle extends Rectangle {
 
-    public PatternedRectangle(Grid start, Grid end) {
+    public CheckedRectangle(Grid start, Grid end) {
         super(start, end);
     }
 
