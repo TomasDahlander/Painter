@@ -40,6 +40,7 @@ public class Window extends JPanel {
     private final JRadioButton checkedRectangleButton = new JRadioButton("Checked rectangle");
     private final JRadioButton layeredRectangleButton = new JRadioButton("Layered rectangle");
     private final JRadioButton stripedRectangleButton = new JRadioButton("Striped rectangle");
+    private final JRadioButton barredRectangleButton = new JRadioButton("Barred rectangle");
 
     // Spinner
     private final JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));
@@ -145,6 +146,7 @@ public class Window extends JPanel {
 
         southEast.add(drawRectangleButton);
         southEast.add(stripedRectangleButton);
+        southEast.add(barredRectangleButton);
 
         southPanel.add(southEast);
 
@@ -154,6 +156,7 @@ public class Window extends JPanel {
         group.add(checkedRectangleButton);
         group.add(layeredRectangleButton);
         group.add(stripedRectangleButton);
+        group.add(barredRectangleButton);
     }
 
     public void clearAll(){
@@ -267,5 +270,9 @@ public class Window extends JPanel {
 
     public JRadioButton getStripedRectangleButton() {
         return stripedRectangleButton;
+    }
+
+    public JRadioButton getBarredRectangleButton() {
+        return barredRectangleButton;
     }
 }

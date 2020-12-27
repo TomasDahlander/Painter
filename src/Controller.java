@@ -200,5 +200,9 @@ public class Controller {
         window.getStripedRectangleButton().addActionListener(l -> {
             rectangleMode = RectangleFactory.STRIPED_RECTANGLE;
         });
+
+        window.getBarredRectangleButton().addActionListener(l -> {
+            rectangleMode = RectangleFactory.BARRED_RECTANGLE;
+        });
     }
 }
