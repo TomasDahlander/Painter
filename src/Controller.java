@@ -69,18 +69,6 @@ public class Controller {
                     }
 
                     @Override
-                    public void mouseReleased(MouseEvent e) {
-                        if(rectangleModeOn){
-                            mouseIsPressed = false;
-
-                            Rectangle rectrangle = factory.getRectangle(rectangleMode,startGrid, endGrid);
-                            rectrangle.draw(window.getPixels(),color,eraserModeOff);
-
-                        }
-                        else mouseIsPressed = false;
-                    }
-
-                    @Override
                     public void mouseEntered(MouseEvent e) {
                         if (!rectangleModeOn && mouseIsPressed){
                             window.getPixels()[finalI][finalJ].paint(color, eraserModeOff);
@@ -88,6 +76,16 @@ public class Controller {
                         else if(rectangleModeOn && mouseIsPressed){
                             endGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
                         }
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        if(rectangleModeOn){
+                            mouseIsPressed = false;
+                            Rectangle rectangle = factory.getRectangle(rectangleMode,startGrid, endGrid);
+                            rectangle.draw(window.getPixels(),color,eraserModeOff);
+                        }
+                        else mouseIsPressed = false;
                     }
                 };
                 window.getPixels()[finalI][finalJ].getPixel().addMouseListener(writer);
@@ -183,20 +181,24 @@ public class Controller {
     }
 
     public void setUpRectangleModeRadioButtonListener(){
-        window.getFullRectangle().addActionListener(l -> {
+        window.getFullRectangleButton().addActionListener(l -> {
             rectangleMode = RectangleFactory.FULL_RECTANGLE;
         });
 
-        window.getHollowRectangle().addActionListener(l -> {
+        window.getHollowRectangleButton().addActionListener(l -> {
             rectangleMode = RectangleFactory.HOLLOW_RECTANGLE;
         });
 
-        window.getCheckedRectangle().addActionListener(l -> {
+        window.getCheckedRectangleButton().addActionListener(l -> {
             rectangleMode = RectangleFactory.CHECKED_RECTANGLE;
         });
 
-        window.getLayeredRectangle().addActionListener(l -> {
+        window.getLayeredRectangleButton().addActionListener(l -> {
             rectangleMode = RectangleFactory.LAYERED_RECTANGLE;
+        });
+
+        window.getStripedRectangleButton().addActionListener(l -> {
+            rectangleMode = RectangleFactory.STRIPED_RECTANGLE;
         });
     }
 }

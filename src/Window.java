@@ -35,10 +35,11 @@ public class Window extends JPanel {
     private final JButton getCustomColorButton = new JButton("Get Custom Color");
     private final JToggleButton eraserButton = new JToggleButton("Eraser mode off");
     private final JToggleButton drawRectangleButton = new JToggleButton("Rectangle mode off");
-    private final JRadioButton fullRectangle = new JRadioButton("Full rectangle",true);
-    private final JRadioButton hollowRectangle = new JRadioButton("Hollow rectangle");
-    private final JRadioButton checkedRectangle = new JRadioButton("Checked rectangle");
-    private final JRadioButton layeredRectangle = new JRadioButton("Layered rectangle");
+    private final JRadioButton fullRectangleButton = new JRadioButton("Full rectangle",true);
+    private final JRadioButton hollowRectangleButton = new JRadioButton("Hollow rectangle");
+    private final JRadioButton checkedRectangleButton = new JRadioButton("Checked rectangle");
+    private final JRadioButton layeredRectangleButton = new JRadioButton("Layered rectangle");
+    private final JRadioButton stripedRectangleButton = new JRadioButton("Striped rectangle");
 
     // Spinner
     private final JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));
@@ -135,22 +136,24 @@ public class Window extends JPanel {
         JPanel southEast = new JPanel(new GridLayout(3,3));
         getCustomColorButton.setBackground(WHITE);
         southEast.add(getCustomColorButton);
-        southEast.add(fullRectangle);
-        southEast.add(layeredRectangle);
+        southEast.add(fullRectangleButton);
+        southEast.add(layeredRectangleButton);
 
         southEast.add(eraserButton);
-        southEast.add(hollowRectangle);
-        southEast.add(checkedRectangle);
+        southEast.add(hollowRectangleButton);
+        southEast.add(checkedRectangleButton);
 
         southEast.add(drawRectangleButton);
+        southEast.add(stripedRectangleButton);
 
         southPanel.add(southEast);
 
         ButtonGroup group = new ButtonGroup();
-        group.add(fullRectangle);
-        group.add(hollowRectangle);
-        group.add(checkedRectangle);
-        group.add(layeredRectangle);
+        group.add(fullRectangleButton);
+        group.add(hollowRectangleButton);
+        group.add(checkedRectangleButton);
+        group.add(layeredRectangleButton);
+        group.add(stripedRectangleButton);
     }
 
     public void clearAll(){
@@ -246,19 +249,23 @@ public class Window extends JPanel {
         return drawRectangleButton;
     }
 
-    public JRadioButton getHollowRectangle() {
-        return hollowRectangle;
+    public JRadioButton getHollowRectangleButton() {
+        return hollowRectangleButton;
     }
 
-    public JRadioButton getFullRectangle() {
-        return fullRectangle;
+    public JRadioButton getFullRectangleButton() {
+        return fullRectangleButton;
     }
 
-    public JRadioButton getCheckedRectangle() {
-        return checkedRectangle;
+    public JRadioButton getCheckedRectangleButton() {
+        return checkedRectangleButton;
     }
 
-    public JRadioButton getLayeredRectangle() {
-        return layeredRectangle;
+    public JRadioButton getLayeredRectangleButton() {
+        return layeredRectangleButton;
+    }
+
+    public JRadioButton getStripedRectangleButton() {
+        return stripedRectangleButton;
     }
 }
