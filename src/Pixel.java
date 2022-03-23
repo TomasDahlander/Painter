@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Project: Painter <br>
  */
 public class Pixel implements Serializable {
-
+    private static final long serialVersionUID = -7355265636111371022L;
     private JLabel pixel;
     private boolean painted;
     private Grid grid;

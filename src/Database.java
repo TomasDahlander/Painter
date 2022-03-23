@@ -20,7 +20,7 @@ public class Database {
 
     public void saveToMemory(Pixel[][] array, int slot){
         String fileName = "Savefiles\\Saved painting nr " + slot + ".ser";
-        try(ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(new File(fileName)))){
+        try(ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(fileName))){
 
             objectOut.writeObject(array);
 
@@ -35,7 +35,7 @@ public class Database {
     public Pixel[][] loadFromMemory(int slot){
         Pixel[][] pixels;
         String fileName = "Savefiles\\Saved painting nr " + slot + ".ser";
-        try(ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(new File(fileName)))) {
+        try(ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(fileName))) {
 
             pixels = (Pixel[][])objectIn.readObject();
             return pixels;
