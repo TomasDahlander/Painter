@@ -8,7 +8,7 @@ import java.util.List;
  * Time: 17:23 <br>
  * Project: Painter <br>
  */
-public class Database {
+public class Database implements Serializable{
 
     private static final Database INSTANCE = new Database();
 

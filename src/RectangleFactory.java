@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * Created by Tomas Dahlander <br>
  * Date: 2020-12-21 <br>
@@ -6,12 +8,12 @@
  */
 public class RectangleFactory {
 
-    public final static int HOLLOW_RECTANGLE = 0;
-    public final static int FULL_RECTANGLE = 1  ;
-    public final static int CHECKED_RECTANGLE = 2;
-    public final static int LAYERED_RECTANGLE = 3;
-    public final static int STRIPED_RECTANGLE = 4;
-    public final static int BARRED_RECTANGLE = 5;
+    public static final int HOLLOW_RECTANGLE = 0;
+    public static final int FULL_RECTANGLE = 1  ;
+    public static final int CHECKED_RECTANGLE = 2;
+    public static final int LAYERED_RECTANGLE = 3;
+    public static final int STRIPED_RECTANGLE = 4;
+    public static final int BARRED_RECTANGLE = 5;
 
     public Rectangle getRectangle(int type, Grid start, Grid end){
         if(type == HOLLOW_RECTANGLE) return new HollowRectangle(start, end);

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -9,10 +10,11 @@ import java.io.Serializable;
  * Project: Painter <br>
  */
 public class Pixel implements Serializable {
+    @Serial
     private static final long serialVersionUID = -7355265636111371022L;
-    private JLabel pixel;
+    private final JLabel pixel;
     private boolean painted;
-    private Grid grid;
+    private final Grid grid;
 
     public Pixel(int labelSideSize, int row, int col){
         this.pixel = new JLabel();

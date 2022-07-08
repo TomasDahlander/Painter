@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
 /**
  * Created by Tomas Dahlander <br>
@@ -53,44 +54,46 @@ public class Controller {
     public void setUpLabelWriterListener(){
         for (int i = 0; i < window.getRow(); i++){
             for (int j = 0; j < window.getCol(); j++){
-                int finalI = i;
-                int finalJ = j;
-                MouseAdapter writer = new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                        if(rectangleModeOn){
-                            mouseIsPressed = true;
-                            startGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
-                        }
-                        else {
-                            mouseIsPressed = true;
-                            window.getPixels()[finalI][finalJ].paint(color, eraserModeOff);
-                        }
-                    }
-
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        if (!rectangleModeOn && mouseIsPressed){
-                            window.getPixels()[finalI][finalJ].paint(color, eraserModeOff);
-                        }
-                        else if(rectangleModeOn && mouseIsPressed){
-                            endGrid = new Grid(window.getPixels()[finalI][finalJ].getGrid());
-                        }
-                    }
-
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                        if(rectangleModeOn){
-                            mouseIsPressed = false;
-                            Rectangle rectangle = factory.getRectangle(rectangleMode,startGrid, endGrid);
-                            rectangle.draw(window.getPixels(),color,eraserModeOff);
-                        }
-                        else mouseIsPressed = false;
-                    }
-                };
-                window.getPixels()[finalI][finalJ].getPixel().addMouseListener(writer);
+                MouseAdapter writer = createMouseAdapter(i,j);
+                window.getPixels()[i][j].getPixel().addMouseListener(writer);
             }
         }
+    }
+
+    public MouseAdapter createMouseAdapter(final int i, final int j){
+        return new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(rectangleModeOn){
+                    mouseIsPressed = true;
+                    startGrid = new Grid(window.getPixels()[i][j].getGrid());
+                }
+                else {
+                    mouseIsPressed = true;
+                    window.getPixels()[i][j].paint(color, eraserModeOff);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (!rectangleModeOn && mouseIsPressed){
+                    window.getPixels()[i][j].paint(color, eraserModeOff);
+                }
+                else if(rectangleModeOn && mouseIsPressed){
+                    endGrid = new Grid(window.getPixels()[i][j].getGrid());
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if(rectangleModeOn){
+                    mouseIsPressed = false;
+                    Rectangle rectangle = factory.getRectangle(rectangleMode,startGrid, endGrid);
+                    rectangle.draw(window.getPixels(),color,eraserModeOff);
+                }
+                else mouseIsPressed = false;
+            }
+        };
     }
 
     public void setUpClearingButtonListener(){

@@ -13,7 +13,7 @@ public abstract class Rectangle {
     Grid topLeft;
     Grid bottomRight;
 
-    public Rectangle(Grid start, Grid end){
+    protected Rectangle(Grid start, Grid end){
         calculateRectangle(start, end);
     }
 

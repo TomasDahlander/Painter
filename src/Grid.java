@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -7,6 +8,7 @@ import java.io.Serializable;
  * Project: Painter <br>
  */
 public class Grid implements Serializable {
+    @Serial
     private static final long serialVersionUID = -8077260071112387331L;
     private int row;
     private int col;
